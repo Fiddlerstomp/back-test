@@ -1,14 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 import Auth from './features/Auth/Auth';
 import Spaces from './features/Spaces/Spaces';
 
+export let token: string = "";
+
 function App() {
+  const setTokenHandler = (newToken: string) => {
+    token = newToken;
+  }
   return (
     <div className="App">
       <div className="Auth">
-        <Auth />
+        <Auth setToken={setTokenHandler} />
       </div>
       <div>
         <Spaces />

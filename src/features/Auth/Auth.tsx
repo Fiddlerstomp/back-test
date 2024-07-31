@@ -1,7 +1,11 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import authAPI from '../../api/auth-api';
 
-const Auth = () => {
+type AuthProps = {
+  setToken: (newToken: string) => void
+}
+
+const Auth = (props: AuthProps) => {
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -16,9 +20,12 @@ const Auth = () => {
   const submitLogin = () => {
     authAPI.login(login, password)
       .then(res => {
+        const token = res.data["API-KEY"];
         console.log(res.status);
         setLogin("");
         setPassword("");
+        props.setToken(token);
+        console.log(token)
       })
   }
 
