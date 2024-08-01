@@ -20,12 +20,11 @@ const Auth = (props: AuthProps) => {
   const submitLogin = () => {
     authAPI.login(login, password)
       .then(res => {
-        const token = res.data["API-KEY"];
-        console.log(res.status);
+        const token: string = res.data;
         setLogin("");
         setPassword("");
         props.setToken(token);
-        console.log(token)
+        console.log("token is: " + token)
       })
   }
 
